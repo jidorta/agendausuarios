@@ -1,4 +1,4 @@
-package com.ejemplo.tareas.dto;
+package com.ejemplo.tareas.dto.response;
 
 public class ApiResponse<T> {
 

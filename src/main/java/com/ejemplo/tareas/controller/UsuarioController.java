@@ -1,7 +1,13 @@
 package com.ejemplo.tareas.controller;
 
-import com.ejemplo.tareas.dto.ApiResponse;
+import com.ejemplo.tareas.dto.request.UserCreateRequest;
+import com.ejemplo.tareas.dto.request.UserUpdateAllRequest;
+import com.ejemplo.tareas.dto.response.ApiResponse;
+import com.ejemplo.tareas.dto.user.UserDTO;
+import com.ejemplo.tareas.dto.user.UserUpdateRequest;
+import com.ejemplo.tareas.mapper.UserMapper;
 import com.ejemplo.tareas.model.Usuario;
+import com.ejemplo.tareas.service.UserService;
 import com.ejemplo.tareas.service.UsuarioDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +22,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioDetailsService usuarioService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<Usuario>>>obtenerTodos(){
@@ -39,6 +48,15 @@ public class UsuarioController {
         return ResponseEntity.ok(new ApiResponse<>("Usuario creado correctamente",creado,true));
     }
 
+    @PutMapping("/users/{id}")
+    public ResponseEntity<UserDTO> updateUser(
+            @PathVariable Long id,
+            @RequestBody UserUpdateRequest request
+            ){
+        Usuario updateUser = userService.updateUser(id,request);
+        return ResponseEntity.ok(UserMapper.toUserDTO(updateUser));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>>eliminarUsuario(@PathVariable Long id){
         Optional<Usuario> usuario = usuarioService.obtenerPorId(id);
@@ -49,6 +67,12 @@ public class UsuarioController {
         }else{
             return ResponseEntity.status(404).body(new ApiResponse<>("Usuario NO encontrado",null,false ));
         }
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<UserDTO>updateUser(@RequestBody UserUpdateAllRequest request){
+        Usuario updated = userService.update(request);
+        return ResponseEntity.ok(UserMapper.toUserDTO(updated));
     }
 
 

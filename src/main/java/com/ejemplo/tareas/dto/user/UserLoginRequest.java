@@ -1,11 +1,11 @@
-package com.ejemplo.tareas.dto;
+package com.ejemplo.tareas.dto.user;
 
-public class LoginRequest {
+public class UserLoginRequest {
 
     private String username;
     private String password;
 
-    public LoginRequest() {
+    public UserLoginRequest() {
     }
     // Getters y setters
     public String getUsername() {

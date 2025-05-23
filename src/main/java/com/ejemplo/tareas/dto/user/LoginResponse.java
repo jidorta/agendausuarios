@@ -1,4 +1,4 @@
-package com.ejemplo.tareas.dto;
+package com.ejemplo.tareas.dto.user;
 
 public class LoginResponse {
     private String token;

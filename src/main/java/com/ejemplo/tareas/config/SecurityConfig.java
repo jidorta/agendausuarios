@@ -43,8 +43,9 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login").permitAll() // <-- permite POST /login sin token
+                        .requestMatchers("/auth/login","/auth/register").permitAll() // <-- permite POST /login sin token
                         .anyRequest().authenticated()
+
                 )
                 .sessionManagement(sess -> sess
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -18,8 +18,29 @@ public class Usuario implements UserDetails {
     @Column(nullable = false, unique = true)
     private String username;
 
+
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Column(nullable = false)
     private String password;
+
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public Usuario(){}
 
