@@ -2,6 +2,7 @@ package com.ejemplo.tareas.service;
 
 import com.ejemplo.tareas.model.Usuario;
 import com.ejemplo.tareas.repository.UsuarioRepository;
+import com.ejemplo.tareas.security.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,10 +26,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         Usuario usuario = usuarioRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
 
-        return new org.springframework.security.core.userdetails.User(
-                usuario.getUsername(),
-                usuario.getPassword(),
-                new ArrayList<>() // aquí podrías devolver roles si tienes
-        );
+        return new CustomUserDetails(usuario);
     }
+
+
 }

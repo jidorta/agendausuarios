@@ -2,7 +2,7 @@ package com.ejemplo.tareas.controller;
 
 
 import com.ejemplo.tareas.model.Tarea;
-import com.ejemplo.tareas.repository.TareaRepositorio;
+import com.ejemplo.tareas.repository.TareaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class TareaController {
 
     @Autowired
-    private TareaRepositorio tareaRepositorio;
+    private TareaRepository tareaRepositorio;
 
     @GetMapping
     public List<Tarea> listarTareas(){

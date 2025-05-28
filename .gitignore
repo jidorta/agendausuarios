@@ -1,2 +1,24 @@
-# Versión remota
-origin/main
+# Archivos de compilación de Maven
+/target/
+
+# Archivos de configuración de IDEs (IntelliJ IDEA, Eclipse, etc.)
+/.idea/
+*.iml
+*.classpath
+*.project
+*.settings/
+
+# Archivos de log
+*.log
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración sensibles
+application.properties
+application.yml
+.env
+
+# Archivos del sistema operativo
+*.swp

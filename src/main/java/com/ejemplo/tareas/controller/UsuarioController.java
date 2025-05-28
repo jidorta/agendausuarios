@@ -11,6 +11,7 @@ import com.ejemplo.tareas.service.UserService;
 import com.ejemplo.tareas.service.UsuarioDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,8 +54,13 @@ public class UsuarioController {
             @PathVariable Long id,
             @RequestBody UserUpdateRequest request
             ){
-        Usuario updateUser = userService.updateUser(id,request);
-        return ResponseEntity.ok(UserMapper.toUserDTO(updateUser));
+        Usuario userToUpdate = new Usuario();
+        userToUpdate.setUsername(request.getUsername());
+        userToUpdate.setEmail(request.getEmail());
+        // Añade aquí todos los campos que necesites copiar del request a user
+
+        Usuario updatedUser = userService.update(id, userToUpdate);
+        return ResponseEntity.ok(UserMapper.toUserDTO(updatedUser));
     }
 
     @DeleteMapping("/{id}")
@@ -69,9 +75,14 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping("/update")
+    @PutMapping("/usuarios")
     public ResponseEntity<UserDTO>updateUser(@RequestBody UserUpdateAllRequest request){
-        Usuario updated = userService.update(request);
+        Usuario userToUpdate = new Usuario();
+        userToUpdate.setId(request.getId());
+        userToUpdate.setUsername(request.getUsername());
+        userToUpdate.setEmail(request.getEmail());
+
+        Usuario updated = userService.update(request.getId(), userToUpdate);
         return ResponseEntity.ok(UserMapper.toUserDTO(updated));
     }
 
