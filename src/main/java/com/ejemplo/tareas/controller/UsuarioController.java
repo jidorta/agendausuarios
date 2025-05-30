@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/api")
 public class UsuarioController {
 
     @Autowired
@@ -26,6 +27,16 @@ public class UsuarioController {
 
     @Autowired
     private UserService userService;
+
+    @GetMapping("/usuarios")
+    public List<UserDTO> listarUsuarios(){
+        List<Usuario> usuarios = userService.findAll();
+        return usuarios.stream()
+                .map(UserMapper::toUserDTO)
+                .collect(Collectors.toList());
+
+
+    }
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<Usuario>>>obtenerTodos(){

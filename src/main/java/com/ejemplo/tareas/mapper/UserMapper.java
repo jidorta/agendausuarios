@@ -4,7 +4,11 @@ import com.ejemplo.tareas.dto.request.UserCreateRequest;
 import com.ejemplo.tareas.dto.user.UserDTO;
 import com.ejemplo.tareas.dto.user.UserUpdateDTO;
 import com.ejemplo.tareas.dto.user.UserUpdateRequest;
+import com.ejemplo.tareas.model.Role;
 import com.ejemplo.tareas.model.Usuario;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class UserMapper {
@@ -15,7 +19,12 @@ public class UserMapper {
         dto.setId(user.getId());
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
-        //dto.setRole(user.getRole());
+
+        Set<String> roles = user.getRoles()
+                .stream()
+                .map(Role::getName)
+                .collect(Collectors.toSet());
+        dto.setRoles(roles);
         return dto;
     }
 

@@ -27,6 +27,11 @@ public class UserServiceImpl implements UserService {
     PasswordEncoder passwordEncoder;
 
     @Override
+    public List<Usuario> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
     public Usuario crearUsuarioConRol(String username, String password, String nombreRol){
         Role rol = roleRepository.findByName(nombreRol)
                 .orElseThrow(() -> new RuntimeException("Rol no encontrado: " + nombreRol));

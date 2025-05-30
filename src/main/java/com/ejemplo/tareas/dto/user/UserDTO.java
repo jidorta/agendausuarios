@@ -1,10 +1,12 @@
 package com.ejemplo.tareas.dto.user;
 
+import java.util.Set;
+
 public class UserDTO {
     private Long id;
     private String username;
     private String email;
-    private String role;
+    private Set<String> roles;
 
     public UserDTO() {
     }
@@ -33,13 +35,12 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
+
+    public Set<String> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
-
-
 }

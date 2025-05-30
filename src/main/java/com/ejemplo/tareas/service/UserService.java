@@ -17,6 +17,7 @@ import java.util.List;
 
 
 public interface UserService {
+    List<Usuario> findAll();
     Usuario crearUsuarioConRol(String username, String password, String nombreRol);
     Usuario getUsuarioById(Long id);
     Usuario save(Usuario user);

@@ -1,10 +1,10 @@
 package com.ejemplo.tareas.repository;
 
 import com.ejemplo.tareas.model.Permiso;
-import com.ejemplo.tareas.model.Role;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface PermisoRepository {
-    Optional<Permiso> findByName(String name);
+public interface PermisoRepository  extends JpaRepository<Permiso,Long> {
+    Optional<Permiso> findByNombre(String nombre);
 }
