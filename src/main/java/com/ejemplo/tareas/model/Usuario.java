@@ -5,10 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -43,6 +40,17 @@ public class Usuario implements UserDetails {
             inverseJoinColumns = @JoinColumn(name= "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Tarea> tarea = new ArrayList<>();
+
+    public List<Tarea> getTarea() {
+        return tarea;
+    }
+
+    public void setTarea(List<Tarea> tarea) {
+        this.tarea = tarea;
+    }
 
     public Set<Role> getRoles() {
         return roles;

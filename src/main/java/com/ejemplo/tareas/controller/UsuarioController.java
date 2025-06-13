@@ -5,6 +5,7 @@ import com.ejemplo.tareas.dto.request.UserUpdateAllRequest;
 import com.ejemplo.tareas.dto.response.ApiResponse;
 import com.ejemplo.tareas.dto.user.UserDTO;
 import com.ejemplo.tareas.dto.user.UserUpdateRequest;
+import com.ejemplo.tareas.dto.user.UsuarioDTO;
 import com.ejemplo.tareas.mapper.UserMapper;
 import com.ejemplo.tareas.model.Usuario;
 import com.ejemplo.tareas.service.UserService;
@@ -97,7 +98,11 @@ public class UsuarioController {
         return ResponseEntity.ok(UserMapper.toUserDTO(updated));
     }
 
-
+@GetMapping("/usuario/tareas/{id}")
+    public ResponseEntity<UsuarioDTO>getUsuarioPorId(@PathVariable Long id){
+      Optional<Usuario> usuario = usuarioService.obtenerPorId(id);
+      return ResponseEntity.ok(new UsuarioDTO(usuario.get()));
+}
 
 
 }

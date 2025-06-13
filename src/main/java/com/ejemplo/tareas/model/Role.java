@@ -1,5 +1,6 @@
 package com.ejemplo.tareas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -23,6 +24,7 @@ public class Role {
     private Set<Permiso>permisos = new HashSet<>();
 
     @ManyToMany(mappedBy ="roles")
+    @JsonIgnore
     private Set<Usuario> usuarios = new HashSet<>();
 
     public Role() {
